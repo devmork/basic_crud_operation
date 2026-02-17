@@ -2,7 +2,7 @@ CREATE DATABASE seams_db;
 
 USE seams_db;
 
-CREATE TABLE attendance_phases (
+CREATE TABLE attendance (
   id INT AUTO_INCREMENT PRIMARY KEY, 
   event_id VARCHAR(50), 
   phase_date DATE, 
