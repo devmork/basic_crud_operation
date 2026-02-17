@@ -1,15 +1,15 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "root"; 
+$password = "";     
 $dbname = "seams_db";
 
-// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// Check connection
+
 if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+    die("Database connection failed. Please check your configuration.");
 }
-echo "Connected successfully";
+
+mysqli_set_charset($conn, "utf8mb4");
 ?>
