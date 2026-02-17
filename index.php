@@ -12,9 +12,8 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance Management System</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SEAM: Crud Activity</title>
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8 max-w-7xl">
