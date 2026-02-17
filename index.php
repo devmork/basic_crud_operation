@@ -1,10 +1,5 @@
 <?php
-// Include database connection
-include 'config.php';
-
-// Fetch all attendance records
-$sql = "SELECT * FROM attendance ORDER BY date DESC, start_time DESC";
-$result = mysqli_query($conn, $sql);
+include 'includes/db.php';
 ?>
 
 <!DOCTYPE html>
