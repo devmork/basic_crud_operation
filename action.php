@@ -44,3 +44,11 @@ if(isset($_POST['update'])) {
     header("Location: index.php");
     exit();
 }
+
+
+if(isset($_POST['delete'])) {
+    $id = $_GET['id'];
+    mysqli_query($conn, "DELETE FROM events WHERE id = '$id'");
+    header("Location: index.php");
+    exit();
+}
