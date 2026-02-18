@@ -70,15 +70,17 @@ The application is built as a learning activity for web development, focusing on
 ```
 basic_crud_operation/
 ├── includes/
-│ └── db.php # Database connection file
+│   └── db.php
 ├── styles/
-│ └── index.css # CSS styles for the application
-├── index.php # Main page (list records)
-├── add.php # Add new record form
-├── edit.php # Edit record form
-├── delete.php # Delete record handler
-├── README.md # This file
-└── database.sql # SQL database setup
+│   ├── index.css
+│   └── form.css
+├── index.php
+├── add.php
+├── edit.php
+├── delete.php
+├── action.php
+├── README.md
+└── database.sql
 ```
 
 ## Troubleshooting
