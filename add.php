@@ -1,8 +1,5 @@
 <?php
 include "action.php";
-$errors = $_SESSION['errors'] ?? [];
-$old    = $_SESSION['old'] ?? [];
-unset($_SESSION['errors'], $_SESSION['old']);
 ?>
 
 <!DOCTYPE html>
