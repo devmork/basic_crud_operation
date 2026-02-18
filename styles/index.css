@@ -20,199 +20,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* header */
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 40px;
-}
-.brand {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-.brand .icon {
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  color: #fff;
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  box-shadow: var(--shadow);
-}
-.brand h1 {
-  margin: 0;
-  font-size: 20px;
-}
-.subtitle {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 14px;
-  border-radius: 10px;
-  text-decoration: none;
-  background: transparent;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  color: #111827;
-  font-size: 14px;
-}
-.btn.primary {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-  border: none;
-  box-shadow: var(--shadow);
-}
-
-/* layout */
-.container {
-  max-width: 1100px;
-  margin: 20px auto;
-  padding: 0 20px;
-}
-.card {
-  background: var(--card);
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: var(--shadow);
-  margin-bottom: 18px;
-}
-
-/* toolbar */
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-.toolbar .left h2 {
-  margin: 0;
-  font-size: 16px;
-}
-
-/* table */
-.table-card {
-  overflow: auto;
-  padding: 0;
-}
-.events-table {
   width: 100%;
-  border-collapse: collapse;
-  min-width: 900px;
-}
-.events-table thead {
-  background: transparent;
-}
-.events-table th {
-  text-align: left;
-  padding: 16px 20px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-  border-bottom: 1px solid #f3f4f6;
-}
-.events-table td {
-  padding: 18px 20px;
-  border-bottom: 1px solid #f6f7fa;
-  vertical-align: middle;
-  font-size: 14px;
-}
-.chip {
-  display: inline-block;
-  padding: 8px;
-  background: #f5f7ff;
-  color: #4f46e5;
-  border-radius: 8px;
-  font-size: 12px;
-}
-.badge {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-}
-.badge.planned {
-  background: #eef2ff;
-  color: #4f46e5;
-}
-.badge.active {
-  background: #ecfdf5;
-  color: #059669;
-}
-.badge.completed {
-  background: #f3f4f6;
-  color: #6b7280;
-}
-.badge.cancelled {
-  background: #fff1f2;
-  color: #b91c1c;
+  max-width: 1400px;
+  margin: 50px auto;
+  padding: 0 35px;
 }
 
-.desc {
-  color: var(--muted);
-  max-width: 240px;
-}
-.actions-td {
-  white-space: nowrap;
-}
-.icon {
-  margin-left: 8px;
-  text-decoration: none;
-  font-size: 16px;
-}
-.icon.edit {
-  color: #4f46e5;
-}
-.icon.del {
-  color: var(--danger);
-}
-
-@media (max-width: 900px) {
-  .toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .events-table {
-    min-width: 700px;
-  }
-}
-
-:root {
-  --bg: #f6f8fb;
-  --card: #ffffff;
-  --muted: #6b7280;
-  --accent: #6a5cff;
-  --accent-2: #7b61ff;
-  --danger: #ff6b6b;
-  --success: #34d399;
-  --shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
-  font-family: Inter, system-ui, Arial, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  background: var(--bg);
-  color: #0f172a;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* header */
-.page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 28px 40px;
-}
 .brand {
   display: flex;
   gap: 14px;
@@ -257,33 +74,45 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* layout */
 .container {
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 20px auto;
   padding: 0 20px;
 }
-.card {
-  background: var(--card);
-  border-radius: 12px;
-  padding: 18px;
-  box-shadow: var(--shadow);
-  margin-bottom: 18px;
+.card.toolbar {
+  padding: 12px 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-/* toolbar */
-.toolbar {
+.card.toolbar .toolbar-inner {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
 }
-.toolbar .left h2 {
+
+.card.toolbar .left h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 1.05rem;
+  color: #222;
+}
+.card.toolbar .controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.card.toolbar .filter-select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6e9ef;
+  background: #fff;
+  min-width: 140px;
 }
 
-/* table */
 .table-card {
   overflow: auto;
   padding: 0;

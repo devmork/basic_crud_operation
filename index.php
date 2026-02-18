@@ -30,8 +30,20 @@ if ($statement) {
 
     <main class="container">
         <section class="card toolbar">
-            <div class="left">
-                <h2>Event Attendance Records</h2>
+            <div class="toolbar-inner">
+                <div class="left">
+                    <h2>Event Attendance Records</h2>
+                </div>
+
+                <div class="controls">
+                    <select id="statusFilter" class="filter-select" aria-label="Filter status">
+                        <option value="">All Status</option>
+                        <option value="Planned">Planned</option>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
             </div>
         </section>
 
