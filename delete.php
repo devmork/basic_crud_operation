@@ -1,8 +1,11 @@
 <?php
 include "action.php";
 
-$id = $_GET["id"];
-$query = mysqli_query($conn, "SELECT * FROM events WHERE id = '$id'");
+$id = (int) $_GET["id"];
+$stmt = mysqli_prepare($conn, "SELECT * FROM events WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$query = mysqli_stmt_get_result($stmt);
 $event = mysqli_fetch_assoc($query);
 
 ?>
