@@ -1,7 +1,17 @@
 <?php
 include 'includes/db.php';
 
-$stmt = mysqli_prepare($conn, "SELECT * FROM events");
+$allowed_statuses = ['Planned', 'Active', 'Completed', 'Cancelled'];
+$filter = $_GET['status'] ?? '';
+
+if (!empty($filter) && in_array($filter, $allowed_statuses)) {
+    $stmt = mysqli_prepare($conn, "SELECT * FROM events WHERE status = ?");
+    mysqli_stmt_bind_param($stmt, "s", $filter);
+} else {
+    $filter = '';
+    $stmt = mysqli_prepare($conn, "SELECT * FROM events");
+}
+
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 mysqli_stmt_close($stmt);
@@ -34,13 +44,15 @@ mysqli_stmt_close($stmt);
                 </div>
 
                 <div class="controls">
-                    <select id="statusFilter" class="filter-select" aria-label="Filter status">
-                        <option value="">All Status</option>
-                        <option value="Planned">Planned</option>
-                        <option value="Ongoing">Ongoing</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
-                    </select>
+                    <form method="GET" action="index.php">
+                        <select name="status" class="filter-select" aria-label="Filter status" onchange="this.form.submit()">
+                            <option value="">All Status</option>
+                            <option value="Planned"   <?= $filter === 'Planned'   ? 'selected' : '' ?>>Planned</option>
+                            <option value="Active"    <?= $filter === 'Active'    ? 'selected' : '' ?>>Active</option>
+                            <option value="Completed" <?= $filter === 'Completed' ? 'selected' : '' ?>>Completed</option>
+                            <option value="Cancelled" <?= $filter === 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                        </select>
+                    </form>
                 </div>
             </div>
         </section>
