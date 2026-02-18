@@ -58,7 +58,7 @@ if(isset($_POST['add'])) {
         (event_id, event_date, start_time, end_time, status, expected_attendees, venue, description) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-    mysqli_stmt_bind_param($stmt, "ssssssss",
+    mysqli_stmt_bind_param($stmt, "sssssiss",
         $event_id,
         $event_date,
         $start_time,
