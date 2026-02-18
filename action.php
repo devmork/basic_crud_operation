@@ -2,45 +2,75 @@
 include "includes/db.php";
 
 if(isset($_POST['add'])) {
-    $event_id = $_POST['event_id'];
-    $event_date = $_POST['event_date'];
-    $start_time = $_POST['start_time'];
-    $end_time = $_POST['end_time'];
-    $status = $_POST['status'];
+    $event_id          = $_POST['event_id'];
+    $event_date        = $_POST['event_date'];
+    $start_time        = $_POST['start_time'];
+    $end_time          = $_POST['end_time'];
+    $status            = $_POST['status'];
     $expected_attendees = $_POST['attendees'];
-    $venue = $_POST['venue'];
-    $description = $_POST['description'];
+    $venue             = $_POST['venue'];
+    $description       = $_POST['description'];
 
-    mysqli_query($conn, "INSERT INTO events (event_id, event_date, start_time, end_time, status, expected_attendees, venue, description) 
-                         VALUES ('$event_id', '$event_date', '$start_time', '$end_time', '$status', '$expected_attendees', '$venue', '$description')");
-    
+    $stmt = mysqli_prepare($conn, "INSERT INTO events 
+        (event_id, event_date, start_time, end_time, status, expected_attendees, venue, description) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+    mysqli_stmt_bind_param($stmt, "ssssssss",
+        $event_id,
+        $event_date,
+        $start_time,
+        $end_time,
+        $status,
+        $expected_attendees,
+        $venue,
+        $description
+    );
+
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
     header("Location: index.php");
     exit();
 }
 
 
 if(isset($_POST['update'])) {
-    $id = $_GET['id'];
-    $event_id = $_POST['event_id'];
-    $event_date = $_POST['event_date'];
-    $start_time = $_POST['start_time'];
-    $end_time = $_POST['end_time'];
-    $status = $_POST['status'];
+    $id                = $_GET['id'];
+    $event_id          = $_POST['event_id'];
+    $event_date        = $_POST['event_date'];
+    $start_time        = $_POST['start_time'];
+    $end_time          = $_POST['end_time'];
+    $status            = $_POST['status'];
     $expected_attendees = $_POST['attendees'];
-    $venue = $_POST['venue'];
-    $description = $_POST['description'];
+    $venue             = $_POST['venue'];
+    $description       = $_POST['description'];
 
-    mysqli_query($conn, "UPDATE events 
-                         SET event_id='$event_id', 
-                             event_date='$event_date', 
-                             start_time='$start_time', 
-                             end_time='$end_time', 
-                             status='$status', 
-                             expected_attendees='$expected_attendees', 
-                             venue='$venue', 
-                             description='$description' 
-                        WHERE id = '$id'");
-    
+    $stmt = mysqli_prepare($conn, "UPDATE events 
+        SET event_id=?, 
+            event_date=?, 
+            start_time=?, 
+            end_time=?, 
+            status=?, 
+            expected_attendees=?, 
+            venue=?, 
+            description=? 
+        WHERE id=?");
+
+    mysqli_stmt_bind_param($stmt, "ssssssssi",
+        $event_id,
+        $event_date,
+        $start_time,
+        $end_time,
+        $status,
+        $expected_attendees,
+        $venue,
+        $description,
+        $id
+    );
+
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
     header("Location: index.php");
     exit();
 }
@@ -48,7 +78,12 @@ if(isset($_POST['update'])) {
 
 if(isset($_POST['delete'])) {
     $id = $_GET['id'];
-    mysqli_query($conn, "DELETE FROM events WHERE id = '$id'");
+
+    $stmt = mysqli_prepare($conn, "DELETE FROM events WHERE id=?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
     header("Location: index.php");
     exit();
 }
