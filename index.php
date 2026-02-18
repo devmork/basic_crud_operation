@@ -1,12 +1,7 @@
 <?php
 include 'includes/db.php';
 
-$sql = "SELECT * FROM attendance ORDER BY event_date DESC, start_time ASC";
-$statement = mysqli_prepare($conn, $sql);
-if ($statement) {
-    mysqli_stmt_execute($statement);
-    mysqli_stmt_bind_result($statement, $id, $event_id, $event_date, $start_time, $end_time, $status, $expected_attendees, $description, $venue);
-}
+$query = mysqli_query($conn, "SELECT * FROM attendance");
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +10,7 @@ if ($statement) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Management</title>
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/index.css"> 
 </head>
 <body>
     <header class="page-header">
@@ -62,34 +57,26 @@ if ($statement) {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php
-                    if ($statement) {
-                        while (mysqli_stmt_fetch($statement)) {
-                            $dateFmt = $event_date ? date('M j, Y', strtotime($event_date)) : '';
-                            $start = $start_time ? date('g:i A', strtotime($start_time)) : '';
-                            $end = $end_time ? date('g:i A', strtotime($end_time)) : '';
-                            $statusClass = strtolower($status);
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($id) . "</td>";
-                            echo "<td><span class='chip'>" . htmlspecialchars($event_id) . "</span></td>";
-                            echo "<td>" . htmlspecialchars($dateFmt) . "</td>";
-                            echo "<td>" . htmlspecialchars($start) . " - " . htmlspecialchars($end) . "</td>";
-                            echo "<td><span class='badge " . htmlspecialchars($statusClass) . "'>" . htmlspecialchars($status) . "</span></td>";
-                            echo "<td>" . htmlspecialchars($expected_attendees) . "</td>";
-                            echo "<td>" . htmlspecialchars($venue) . "</td>";
-                            echo "<td class='desc'>" . htmlspecialchars(mb_strimwidth($description, 0, 48, '...')) . "</td>";
-                            echo "<td class='actions-td'>
-                                    <a class='icon edit' href='edit.php?id=" . htmlspecialchars($id) . "' title='Edit'>✏️</a>
-                                    <a class='icon del' href='delete.php?id=" . htmlspecialchars($id) . "' onclick='return confirm(\"Confirm deletion?\")' title='Delete'>🗑️</a>
-                                  </td>";
-                            echo "</tr>";
-                        }
-                        mysqli_stmt_close($statement);
-                    } else {
-                        echo "<tr><td colspan='9'>An error occurred while fetching records.</td></tr>";
-                    }
+                
+                <tbody> 
+                    <?php 
+                     while ($events = mysqli_fetch_assoc($query)) :
                     ?>
+                    <tr>
+                        <td><?= $events['id'] ?></td>
+                        <td><?= $events['event_id'] ?></td>
+                        <td><?= $events['event_date'] ?></td>
+                        <td><?= $events['start_time'] ?> - <?= $events['end_time'] ?></td>
+                        <td><span class='badge <?= strtolower($events['status']) ?>'><?= $events['status'] ?></span></td>
+                        <td><?= $events['expected_attendees'] ?></td>
+                        <td><?= $events['venue'] ?></td>
+                        <td><?= $events['description'] ?></td>
+                        <td class='actions-td'>
+                            <a class='icon edit' href='edit.php?id=<?= htmlspecialchars($events['id']) ?>' title='Edit'>✏️</a>
+                            <a class='icon del' href='delete.php?id=<?= htmlspecialchars($events['id']) ?>' onclick='return confirm("Confirm deletion?")' title='Delete'>🗑️</a>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
                 </tbody>
             </table>
         </section>
