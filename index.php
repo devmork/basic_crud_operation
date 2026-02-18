@@ -34,7 +34,7 @@ include 'includes/db.php';
             $statement = mysqli_prepare($conn, $sql);
             if ($statement) {
                 mysqli_stmt_execute($statement);
-                mysqli_stmt_bind_result($statement, $id, $event_id, $date, $start_time, $end_time, $status, $attendees, $description, $venue);
+                mysqli_stmt_bind_result($statement, $id, $event_id, $event_date, $start_time, $end_time, $status, $attendees, $description, $venue);
                 while (mysqli_stmt_fetch($statement)) {
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($id) . "</td>";
@@ -52,7 +52,7 @@ include 'includes/db.php';
                           </td>";
                     echo "</tr>";
                 }
-                mysqli_stmt_close($stmt);
+                mysqli_stmt_close($statement);
             } else {
                 echo "<tr><td colspan='10'>An error occurred while fetching records.</td></tr>";
             }
