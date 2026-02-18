@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "includes/db.php";
 
 function validateEventInputs($post) {
@@ -32,9 +33,6 @@ function validateEventInputs($post) {
 
     return $errors;
 }
-
-
-
 
 if(isset($_POST['add'])) {
 
