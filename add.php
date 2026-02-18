@@ -1,5 +1,4 @@
 <?php
-session_start();
 include "action.php";
 $errors = $_SESSION['errors'] ?? [];
 $old    = $_SESSION['old'] ?? [];
