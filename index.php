@@ -1,7 +1,7 @@
 <?php
 include 'includes/db.php';
 
-$query = mysqli_query($conn, "SELECT * FROM attendance");
+$query = mysqli_query($conn, "SELECT * FROM events");
 ?>
 
 <!DOCTYPE html>
