@@ -5,10 +5,17 @@ USE seams_db;
 CREATE TABLE attendance (
   id INT AUTO_INCREMENT PRIMARY KEY, 
   event_id VARCHAR(50), 
-  phase_date DATE, 
+  date DATE, 
   start_time TIME, 
   end_time TIME, 
-  phase_status ENUM('Planned', 'Active', 'Completed', 'Cancelled'), 
-  expected_attendees INT, description TEXT, 
+  status ENUM('Planned', 'Active', 'Completed', 'Cancelled'), 
+  attendees INT, description TEXT, 
   venue VARCHAR(100)
 );
+
+-- DUMMY RECORDS
+INSERT INTO attendance (event_id, date, start_time, end_time, status, attendees, description, venue) VALUES
+('EVT001', '2026-02-20', '09:00:00', '11:00:00', 'Planned', 50, 'Opening ceremony for the school fair.', 'Main Auditorium'),
+('EVT002', '2026-02-21', '14:00:00', '16:00:00', 'Active', 30, 'Workshop on environmental awareness.', 'Room 101'),
+('EVT003', '2026-02-22', '10:00:00', '12:00:00', 'Completed', 100, 'Sports day event.', 'School Field'),
+('EVT004', '2026-02-23', '13:00:00', '15:00:00', 'Cancelled', 20, 'Cancelled due to weather.', 'Gymnasium');
