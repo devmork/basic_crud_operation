@@ -7,7 +7,7 @@ include "action.php";
 <head>
     <meta charset="UTF-8">
     <title>Add New Event</title>
-    <link rel="stylesheet" href="styles/add.css">
+    <link rel="stylesheet" href="styles/form.css">
 </head>
 <body>
     <div class="modal-wrap">
