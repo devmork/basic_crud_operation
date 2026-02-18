@@ -60,13 +60,16 @@ $query = mysqli_query($conn, "SELECT * FROM attendance");
                 
                 <tbody> 
                     <?php 
-                     while ($events = mysqli_fetch_assoc($query)) :
+                        while ($events = mysqli_fetch_assoc($query)) :
+                        $dateFmt = $events['event_date'] ? date('M j, Y', strtotime($events['event_date'])) : '';
+                        $start = $events['start_time'] ? date('g:i A', strtotime($events['start_time'])) : '';
+                        $end = $events['end_time'] ? date('g:i A', strtotime($events['end_time'])) : '';
                     ?>
                     <tr>
                         <td><?= $events['id'] ?></td>
                         <td><?= $events['event_id'] ?></td>
-                        <td><?= $events['event_date'] ?></td>
-                        <td><?= $events['start_time'] ?> - <?= $events['end_time'] ?></td>
+                        <td><?= $dateFmt ?></td>
+                        <td><?= $start ?> - <?= $end ?></td>
                         <td><span class='badge <?= strtolower($events['status']) ?>'><?= $events['status'] ?></span></td>
                         <td><?= $events['expected_attendees'] ?></td>
                         <td><?= $events['venue'] ?></td>
