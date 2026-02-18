@@ -21,7 +21,7 @@ $event = mysqli_fetch_assoc($query);
                 <h2>Edit Event</h2>
             </header>
 
-            <form method="POST" action="action.php" class="form-grid" >
+            <form method="POST" action="action.php?id=<?= $id ?>" class="form-grid" >
                 <label>
                     <span class="label-text">Event ID *</span>
                     <input type="text" name="event_id" placeholder="e.g., EVT-2026-001" required value="<?= htmlspecialchars($event['event_id']); ?>">
