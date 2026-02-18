@@ -5,7 +5,7 @@ $sql = "SELECT * FROM attendance ORDER BY event_date DESC, start_time ASC";
 $statement = mysqli_prepare($conn, $sql);
 if ($statement) {
     mysqli_stmt_execute($statement);
-    mysqli_stmt_bind_result($statement, $id, $event_id, $event_date, $start_time, $end_time, $status, $attendees, $description, $venue);
+    mysqli_stmt_bind_result($statement, $id, $event_id, $event_date, $start_time, $end_time, $status, $expected_attendees, $description, $venue);
 }
 ?>
 
@@ -14,15 +14,15 @@ if ($statement) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEAM — Event Attendance Management</title>
+    <title>Event Management</title>
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
     <header class="page-header">
         <div class="brand">
             <div>
-                <h1>Event Attendance Management</h1>
-                <p class="subtitle">Track and manage event attendance.</p>
+                <h1>Event Management</h1>
+                <p class="subtitle">Track and manage events.</p>
             </div>
         </div>
         <a class="btn primary" href="add.php">+ Add New Event</a>
@@ -32,7 +32,7 @@ if ($statement) {
         <section class="card toolbar">
             <div class="toolbar-inner">
                 <div class="left">
-                    <h2>Event Attendance Records</h2>
+                    <h2>Event Records</h2>
                 </div>
 
                 <div class="controls">
@@ -56,7 +56,7 @@ if ($statement) {
                         <th>Date</th>
                         <th>Time</th>
                         <th>Status</th>
-                        <th>Attendees</th>
+                        <th>Expected Attendees</th>
                         <th>Venue</th>
                         <th>Description</th>
                         <th>Actions</th>
@@ -76,7 +76,7 @@ if ($statement) {
                             echo "<td>" . htmlspecialchars($dateFmt) . "</td>";
                             echo "<td>" . htmlspecialchars($start) . " - " . htmlspecialchars($end) . "</td>";
                             echo "<td><span class='badge " . htmlspecialchars($statusClass) . "'>" . htmlspecialchars($status) . "</span></td>";
-                            echo "<td>" . htmlspecialchars($attendees) . "</td>";
+                            echo "<td>" . htmlspecialchars($expected_attendees) . "</td>";
                             echo "<td>" . htmlspecialchars($venue) . "</td>";
                             echo "<td class='desc'>" . htmlspecialchars(mb_strimwidth($description, 0, 48, '...')) . "</td>";
                             echo "<td class='actions-td'>
