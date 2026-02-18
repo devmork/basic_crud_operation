@@ -76,7 +76,7 @@ $query = mysqli_query($conn, "SELECT * FROM events");
                         <td><?= $events['description'] ?></td>
                         <td class='actions-td'>
                             <a class='icon edit' href='edit.php?id=<?= htmlspecialchars($events['id']) ?>' title='Edit'>✏️</a>
-                            <a class='icon del' href='delete.php?id=<?= htmlspecialchars($events['id']) ?>' onclick='return confirm("Confirm deletion?")' title='Delete'>🗑️</a>
+                            <a class='icon del' href='delete.php?id=<?= htmlspecialchars($events['id']) ?>'title='Delete'>🗑️</a>
                         </td>
                     </tr>
                     <?php endwhile; ?>
